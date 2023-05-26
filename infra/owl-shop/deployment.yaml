@@ -29,4 +29,4 @@ spec:
           - name: SHOP_TRAFFIC_INTERVAL_DURATION
             value: "0.1s"
           - name: SHOP_KAFKA_BROKERS
-            value: "redpanda-cluster.redpande.svc.cluster.local:9092"
+            value: "redpanda-cluster.redpanda.svc.cluster.local:9092"
