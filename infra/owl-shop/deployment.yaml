@@ -30,3 +30,5 @@ spec:
             value: "0.1s"
           - name: SHOP_KAFKA_BROKERS
             value: "redpanda-cluster.redpanda.svc.cluster.local:9092"
+          - name: SHOP_KAFKA_TOPICREPLICATIONFACTOR
+            value: "1"
