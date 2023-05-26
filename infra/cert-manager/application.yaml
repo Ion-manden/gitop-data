@@ -37,7 +37,7 @@ spec:
   source:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
-    targetRevision: v23.1.11
+    targetRevision: v1.12.1
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cert-manager
