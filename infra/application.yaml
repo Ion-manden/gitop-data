@@ -1,7 +1,8 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: base-app
+  namespace: argocd
 spec:
   source:
     path: infra
@@ -12,7 +13,7 @@ spec:
       include: "application.yaml"
   destination:
     name: ''
-    # namespace: default
+    namespace: argocd
     server: 'https://kubernetes.default.svc'
   sources: []
   project: default
