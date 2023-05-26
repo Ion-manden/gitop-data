@@ -39,3 +39,9 @@ spec:
   destination:
     server: "https://kubernetes.default.svc"
     namespace: redpanda
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
