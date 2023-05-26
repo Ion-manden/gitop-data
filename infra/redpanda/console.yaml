@@ -22,7 +22,7 @@ spec:
       - name: console
         image: docker.redpanda.com/redpandadata/console:v2.2.4
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         env:
           - name: CONFIG_FILEPATH
             value: "/tmp/config.yml"
@@ -37,8 +37,3 @@ spec:
                 adminApi:
                   enabled: true
                   urls: ["http://redpanda-cluster.redpanda.svc.cluster.local:9644"]
-              # connect:
-              #   enabled: true
-              #   clusters:
-              #     - name: local-connect-cluster
-              #       url: http://connect:8083
