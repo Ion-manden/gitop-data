@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redpanda-helm
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: redpanda-operator
+    repoURL: https://charts.vectorized.io/redpanda
+    targetRevision: v23.1.11
+    helm:
+      releaseName: redpanda-operator
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: redpanda
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redpanda-cluster
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: redpanda
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: infra/redpanda
+    repoURL: 'https://github.com/Ion-manden/gitop-data.git'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
