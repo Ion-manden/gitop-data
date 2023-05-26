@@ -31,8 +31,8 @@ metadata:
 spec:
   project: default
   source:
-    chart: redpanda
-    repoURL: https://charts.redpanda.com
+    chart: redpanda-operator
+    repoURL: https://charts.vectorized.io
     targetRevision: v23.1.11
     # helm:
     #   releaseName: redpanda-operator
