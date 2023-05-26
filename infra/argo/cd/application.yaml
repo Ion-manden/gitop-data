@@ -9,6 +9,7 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
+      exclude: "application.yaml"
   destination:
     name: ''
     namespace: argocd
