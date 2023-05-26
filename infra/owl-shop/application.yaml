@@ -4,16 +4,16 @@ metadata:
   name: owl-shop
   namespace: argocd
 spec:
-  destination:
-    name: ''
-    namespace: owl-shop
-    server: 'https://kubernetes.default.svc'
   source:
     path: infra/owl-shop
     repoURL: 'https://github.com/Ion-manden/gitops-data.git'
     targetRevision: HEAD
     directory:
       recurse: true
+  destination:
+    name: ''
+    namespace: owl-shop
+    server: 'https://kubernetes.default.svc'
   sources: []
   project: default
   syncPolicy:
