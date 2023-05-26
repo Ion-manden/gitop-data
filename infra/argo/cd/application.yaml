@@ -3,16 +3,16 @@ kind: Application
 metadata:
   name: argocd
 spec:
-  destination:
-    name: ''
-    namespace: argocd
-    server: 'https://kubernetes.default.svc'
   source:
     path: infra/argo/cd
     repoURL: 'https://github.com/Ion-manden/gitop-data.git'
     targetRevision: HEAD
     directory:
       recurse: true
+  destination:
+    name: ''
+    namespace: argocd
+    server: 'https://kubernetes.default.svc'
   sources: []
   project: default
   syncPolicy:

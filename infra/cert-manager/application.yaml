@@ -4,20 +4,16 @@ metadata:
   name: cert-manager-app
   namespace: argocd
 spec:
-  destination:
-    name: ''
-    namespace: cert-manager
-    server: 'https://kubernetes.default.svc'
   source:
     path: infra/cert-manager
     repoURL: 'https://github.com/Ion-manden/gitop-data.git'
     targetRevision: HEAD
     directory:
       recurse: true
-    helm:
-      parameters:
-      - name: "installCRDs"
-        value: "true"
+  destination:
+    name: ''
+    namespace: cert-manager
+    server: 'https://kubernetes.default.svc'
   sources: []
   project: default
   syncPolicy:
@@ -38,6 +34,10 @@ spec:
     chart: cert-manager
     repoURL: https://charts.jetstack.io
     targetRevision: v1.12.1
+    helm:
+      parameters:
+      - name: "installCRDs"
+        value: "true"
   destination:
     server: "https://kubernetes.default.svc"
     namespace: cert-manager

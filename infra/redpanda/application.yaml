@@ -4,16 +4,16 @@ metadata:
   name: redpanda-app
   namespace: argocd
 spec:
-  destination:
-    name: ''
-    namespace: redpanda
-    server: 'https://kubernetes.default.svc'
   source:
     path: infra/redpanda
     repoURL: 'https://github.com/Ion-manden/gitop-data.git'
     targetRevision: HEAD
     directory:
       recurse: true
+  destination:
+    name: ''
+    namespace: redpanda
+    server: 'https://kubernetes.default.svc'
   sources: []
   project: default
   syncPolicy:
