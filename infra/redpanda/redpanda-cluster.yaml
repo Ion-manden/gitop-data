@@ -1,6 +1,7 @@
 apiVersion: redpanda.vectorized.io/v1alpha1
 kind: Cluster
 metadata:
+  namespace: redpanda
   name: redpanda-cluster
 spec:
   image: "redpandadata/redpanda"
