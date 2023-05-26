@@ -6,8 +6,8 @@ metadata:
 spec:
   project: default
   source:
-    chart: redpanda-operator
-    repoURL: https://charts.vectorized.io/redpanda/redpanda-operator
+    chart: redpanda
+    repoURL: https://charts.vectorized.io
     targetRevision: v23.1.11
     helm:
       releaseName: redpanda-operator
