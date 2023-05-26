@@ -1,1 +1,1 @@
-# gitop-data
+# gitops-data

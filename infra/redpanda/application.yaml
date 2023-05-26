@@ -6,7 +6,7 @@ metadata:
 spec:
   source:
     path: infra/redpanda
-    repoURL: 'https://github.com/Ion-manden/gitop-data.git'
+    repoURL: 'https://github.com/Ion-manden/gitops-data.git'
     targetRevision: HEAD
     directory:
       recurse: true
@@ -36,6 +36,27 @@ spec:
     targetRevision: v23.1.11
     # helm:
     #   releaseName: redpanda-operator
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: redpanda
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redpanda-crds
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/redpanda-data/redpanda'
+    path: src/go/k8s/config/crd/
+    targetRevision: v23.1.11
   destination:
     server: "https://kubernetes.default.svc"
     namespace: redpanda

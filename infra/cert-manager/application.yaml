@@ -6,7 +6,7 @@ metadata:
 spec:
   source:
     path: infra/cert-manager
-    repoURL: 'https://github.com/Ion-manden/gitop-data.git'
+    repoURL: 'https://github.com/Ion-manden/gitops-data.git'
     targetRevision: HEAD
     directory:
       recurse: true

@@ -10,7 +10,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     path: infra/owl-shop
-    repoURL: 'https://github.com/Ion-manden/gitop-data.git'
+    repoURL: 'https://github.com/Ion-manden/gitops-data.git'
     targetRevision: HEAD
     directory:
       recurse: true
