@@ -10,7 +10,7 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
-      include: "application.yaml"
+      include: "*/application.yaml"
   destination:
     name: ''
     namespace: argocd
