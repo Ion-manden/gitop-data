@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redpanda-console-deployment
+  namespace: redpanda
+  labels:
+    app: redpanda-console
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redpanda-console
+
+  template:
+    metadata:
+      labels:
+        app: redpanda-console
+
+    spec:
+      containers:
+      - name: console
+        image: docker.redpanda.com/redpandadata/console:v2.2.4
+        ports:
+        - containerPort: 80
+        env:
+          - name: CONFIG_FILEPATH
+            value: "/tmp/config.yml"
+          - name: CONSOLE_CONFIG_FILE
+            value: |
+              kafka:
+                brokers: ["redpanda-cluster.redpanda.svc.cluster.local:9092"]
+                schemaRegistry:
+                  enabled: true
+                  urls: ["http://redpanda-cluster-cluster.redpanda.svc.cluster.local:8081"]
+              redpanda:
+                adminApi:
+                  enabled: true
+                  urls: ["http://redpanda-cluster.redpanda.svc.cluster.local:9644"]
+              # connect:
+              #   enabled: true
+              #   clusters:
+              #     - name: local-connect-cluster
+              #       url: http://connect:8083
