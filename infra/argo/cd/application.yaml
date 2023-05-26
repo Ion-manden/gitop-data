@@ -8,7 +8,7 @@ spec:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
   source:
-    path: infra/argo/cd
+    path: infra
     repoURL: 'https://github.com/Ion-manden/gitop-data.git'
     targetRevision: HEAD
     directory:
