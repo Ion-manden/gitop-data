@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: owl-shop-deployment
+  namespace: owl-shop
+  labels:
+    app: owl-shop
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: owl-shop
+
+  template:
+    metadata:
+      labels:
+        app: owl-shop
+
+    spec:
+      containers:
+      - name: owl-shop
+        image: quay.io/cloudhut/owl-shop:latest
+        ports:
+        - containerPort: 80
+        env:
+          - name: SHOP_TRAFFIC_INTERVAL_RATE
+            value: "1"
+          - name: SHOP_TRAFFIC_INTERVAL_DURATION
+            value: "0.1s"
+          - name: SHOP_KAFKA_BROKERS
+            value: "redpanda-cluster.redpande.svc.cluster.local:9092"
