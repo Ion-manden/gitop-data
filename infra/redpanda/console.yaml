@@ -22,8 +22,7 @@ metadata:
   namespace: redpanda
 spec:
   selector:
-    label: 
-      app: redpanda-console
+    app: redpanda-console
   ports:
     - protocol: TCP
       port: 80
