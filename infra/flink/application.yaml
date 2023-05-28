@@ -55,6 +55,7 @@ metadata:
   name: flink-operator-crds
   namespace: argocd
 spec:
+  project: default
   source:
     repoURL: https://github.com/apache/flink-kubernetes-operator
     targetRevision: main
@@ -77,6 +78,7 @@ metadata:
   name: flink-operator-skip-crds
   namespace: argocd
 spec:
+  project: default
   source:
     repoURL: https://github.com/apache/flink-kubernetes-operator
     targetRevision: main
