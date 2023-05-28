@@ -58,7 +58,7 @@ spec:
 #   project: default
 #   source:
 #     repoURL: https://github.com/apache/flink-kubernetes-operator
-#     targetRevision: release-1.5
+#     targetRevision: release-1.5.0
 #     path: helm/flink-kubernetes-operator/crds
 #     syncOptions:
 #     - Replace=true
@@ -81,7 +81,7 @@ spec:
 #   project: default
 #   source:
 #     repoURL: https://github.com/apache/flink-kubernetes-operator
-#     targetRevision: release-1.5
+#     targetRevision: release-1.5.0
 #     path: helm/flink-kubernetes-operator
 #     helm:
 #       skipCrds: true
