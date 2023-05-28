@@ -52,7 +52,8 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: flink-kubernetes-operator-crds
+  name: flink-operator-crds
+  namespace: argocd
 spec:
   source:
     repoURL: https://github.com/apache/flink-kubernetes-operator
@@ -73,7 +74,8 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: flink-kubernetes-operator-skip-crds
+  name: flink-operator-skip-crds
+  namespace: argocd
 spec:
   source:
     repoURL: https://github.com/apache/flink-kubernetes-operator
