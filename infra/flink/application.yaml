@@ -24,21 +24,63 @@ spec:
     syncOptions:
       - PrunePropagationPolicy=foreground
 ---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: flink-helm
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     chart: flink-kubernetes-operator
+#     repoURL: https://downloads.apache.org/flink/flink-kubernetes-operator-1.5.0
+#     targetRevision: 1.5.0
+#     # helm:
+#     #   parameters:
+#     #   - name: "webhook.create"
+#     #     value: "false"
+#   destination:
+#     server: "https://kubernetes.default.svc"
+#     namespace: flink
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - PrunePropagationPolicy=foreground
+# ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: flink-helm
-  namespace: argocd
+  name: flink-kubernetes-operator-crds
 spec:
-  project: default
   source:
-    chart: flink-kubernetes-operator
-    repoURL: https://downloads.apache.org/flink/flink-kubernetes-operator-1.5.0
-    targetRevision: 1.5.0
-    # helm:
-    #   parameters:
-    #   - name: "webhook.create"
-    #     value: "false"
+    repoURL: https://github.com/apache/flink-kubernetes-operator
+    targetRevision: main
+    path: helm/flink-kubernetes-operator/crds
+    syncOptions:
+    - Replace=true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: flink
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flink-kubernetes-operator-skip-crds
+spec:
+  source:
+    repoURL: https://github.com/apache/flink-kubernetes-operator
+    targetRevision: main
+    path: helm/flink-kubernetes-operator
+    helm:
+      skipCrds: true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: flink
