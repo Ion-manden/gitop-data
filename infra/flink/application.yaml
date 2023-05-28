@@ -24,21 +24,44 @@ spec:
     syncOptions:
       - PrunePropagationPolicy=foreground
 ---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flink-helm
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: flink-kubernetes-operator
+    repoURL: https://downloads.apache.org/flink/flink-kubernetes-operator-1.5.0
+    targetRevision: 1.5.0
+    # helm:
+    #   parameters:
+    #   - name: "webhook.create"
+    #     value: "false"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: flink
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+# ---
 # apiVersion: argoproj.io/v1alpha1
 # kind: Application
 # metadata:
-#   name: flink-helm
+#   name: flink-operator-crds
 #   namespace: argocd
 # spec:
 #   project: default
 #   source:
-#     chart: flink-kubernetes-operator
-#     repoURL: https://downloads.apache.org/flink/flink-kubernetes-operator-1.5.0
-#     targetRevision: 1.5.0
-#     # helm:
-#     #   parameters:
-#     #   - name: "webhook.create"
-#     #     value: "false"
+#     repoURL: https://github.com/apache/flink-kubernetes-operator
+#     targetRevision: release-1.5
+#     path: helm/flink-kubernetes-operator/crds
+#     syncOptions:
+#     - Replace=true
 #   destination:
 #     server: "https://kubernetes.default.svc"
 #     namespace: flink
@@ -49,48 +72,25 @@ spec:
 #     syncOptions:
 #       - PrunePropagationPolicy=foreground
 # ---
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: flink-operator-crds
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/apache/flink-kubernetes-operator
-    targetRevision: release-1.5
-    path: helm/flink-kubernetes-operator/crds
-    syncOptions:
-    - Replace=true
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: flink
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - PrunePropagationPolicy=foreground
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: flink-operator-skip-crds
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/apache/flink-kubernetes-operator
-    targetRevision: release-1.5
-    path: helm/flink-kubernetes-operator
-    helm:
-      skipCrds: true
-  destination:
-    server: "https://kubernetes.default.svc"
-    namespace: flink
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - PrunePropagationPolicy=foreground
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: flink-operator-skip-crds
+#   namespace: argocd
+# spec:
+#   project: default
+#   source:
+#     repoURL: https://github.com/apache/flink-kubernetes-operator
+#     targetRevision: release-1.5
+#     path: helm/flink-kubernetes-operator
+#     helm:
+#       skipCrds: true
+#   destination:
+#     server: "https://kubernetes.default.svc"
+#     namespace: flink
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
+#     syncOptions:
+#       - PrunePropagationPolicy=foreground
