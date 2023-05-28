@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flink-app
+  namespace: argocd
+spec:
+  source:
+    path: infra/flink
+    repoURL: 'https://github.com/Ion-manden/gitops-data.git'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+      exclude: "application.yaml"
+  destination:
+    name: ''
+    namespace: flink
+    server: 'https://kubernetes.default.svc'
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flink-helm
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: flink-kubernetes-operator
+    repoURL: https://downloads.apache.org/flink/flink-kubernetes-operator-1.17.1
+    # targetRevision: v1.12.1
+    # helm:
+    #   parameters:
+    #   - name: "webhook.create"
+    #     value: "false"
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: flink
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
