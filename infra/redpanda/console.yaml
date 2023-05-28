@@ -15,6 +15,18 @@ data:
         enabled: true
         urls: ["http://redpanda-cluster.redpanda.svc.cluster.local:9644"]
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redpanda-console-service
+spec:
+  selector:
+    app.kubernetes.io/name: redpanda-console
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
