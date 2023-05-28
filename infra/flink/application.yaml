@@ -34,7 +34,7 @@ spec:
   source:
     chart: flink-kubernetes-operator
     repoURL: https://downloads.apache.org/flink/flink-kubernetes-operator-1.17.1
-    # targetRevision: v1.12.1
+    targetRevision: HEAD
     # helm:
     #   parameters:
     #   - name: "webhook.create"
