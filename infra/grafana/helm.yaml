@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana-helm
+  namespace: grafana
+spec:
+  project: default
+  source:
+    chart: grafana-operator
+    repoURL: oci://ghcr.io/grafana/helm-charts/grafana-operator
+    targetRevision: v5.6.0
+  destination:
+    name: ''
+    namespace: grafana
+    server: 'https://kubernetes.default.svc'
