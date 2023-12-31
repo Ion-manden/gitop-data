@@ -23,3 +23,28 @@ spec:
       selfHeal: true
     syncOptions:
       - PrunePropagationPolicy=foreground
+
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio-helm
+  namespace: argocd
+spec:
+  project: default
+  source:
+    chart: minio-operator
+    repoURL: https://operator.min.io
+    # targetRevision: v23.1.11
+    # helm:
+    #   releaseName: redpanda-operator
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: minio-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - PrunePropagationPolicy=foreground
