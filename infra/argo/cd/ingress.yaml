@@ -6,19 +6,6 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 
-# spec:
-#   ingressClassName: argo-cd
-#   rules:
-#   - host: "argocd.localhost"
-#     http:
-#       paths:
-#         - pathType: Prefix
-#           path: "/"
-#           backend:
-#             service:
-#               name: argocd-server
-#               port:
-#                 number: 80
 spec:
   ingressClassName: argo-cd
   rules:
@@ -26,6 +13,16 @@ spec:
       paths:
         - pathType: Prefix
           path: "/argocd"
+          backend:
+            service:
+              name: argocd-server
+              port:
+                number: 80
+  - host: "argocd.local"
+    http:
+      paths:
+        - pathType: Prefix
+          path: "/"
           backend:
             service:
               name: argocd-server
