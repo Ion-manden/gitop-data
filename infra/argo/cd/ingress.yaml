@@ -9,12 +9,13 @@ metadata:
 spec:
   ingressClassName: argo-cd
   rules:
-  - http:
-    paths:
-    - path: "/"
-      # pathType: Prefix
-      backend:
-        service:
-          name: argocd-server
-          port:
-            number: 80
+  - host: "argocd.localhost"
+    http:
+      paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: argocd-server
+              port:
+                number: 80
